@@ -3,21 +3,21 @@
     <h1>Would you rather...</h1>
     <WouldYouRather 
       v-for = "question in questions" 
-      v-bind:key="question.id" 
+      v-bind:key="question.id"
       v-on:answer-changed = "choiceMade" 
       v-bind:question= "question.question"
       v-bind:id = "question.id"
       v-bind:answer1="question.answer1"
-      v-bind:answer2="question.answer2">
+      v-bind:answer2="question.answer2"> <!--bind props, handle change event-->
     </WouldYouRather><br>
-    <div id = "results" v-if = "filled">
+    <div id = "results" v-if = "filled"> <!--only display data if user selects an answer (could use v-show too)-->
       <h4>You chose:</h4>
-      <ul v-for = "userChoice in userChoices" v-bind:key="userChoice.index">
-        <li v-show = "userChoice"> {{userChoice}}
+      <ul v-for = "userChoice in userChoices" v-bind:key="userChoice.index"> <!--bind to index of array for unique value-->
+        <li v-show = "userChoice"> {{userChoice}} <!--will only show answers that have been completed-->
         </li>
       </ul>
     </div>
-    <div id = "results" v-else>Choose an answer above</div>
+    <div id = "results" v-else>Choose an answer above</div> <!--message if user hasn't selected an answer-->
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
   },
   data(){
     return {
-      questions: [
+      questions: [ //I chose a theme of powers
         {
           id: 0,
           question: '...be able to control fire or water?',
@@ -51,16 +51,16 @@ export default {
           answer2: 'Speed'
         }
       ],
-      userChoices: ['', '', ''],
+      userChoices: ['', '', ''], //initialize with 3 choices to avoid errors
       choice: '',
-      filled: false
+      filled: false //has user selected an answer yet?
     }
   },
   methods: {
     choiceMade(choiceId, choice){
-      this.filled = true
+      this.filled = true //user has selected an answer
       console.log(`User choice = ${choiceId, choice}`)
-      this.$set(this.userChoices, choiceId, choice)
+      this.$set(this.userChoices, choiceId, choice) //dynamically respond to user input with $set
     },
   }
 }

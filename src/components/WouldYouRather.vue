@@ -1,9 +1,9 @@
 <template>
     <div class = "box">
         <h2>{{ question }}</h2>
-        <input type = "radio" v-model = "choice" v-bind:value = "answer1" v-on:change = "answerChanged(choice)">
+        <input type = "radio" v-model = "choice" v-bind:value = "answer1" v-on:change = "answerChanged(choice)"> <!--send answer1 to answerChanged, parent-->
         <label>{{ answer1 }}</label><br>
-        <input type = "radio" v-model = "choice" v-bind:value = "answer2" v-on:change = "answerChanged(choice)">
+        <input type = "radio" v-model = "choice" v-bind:value = "answer2" v-on:change = "answerChanged(choice)"> <!--same as above except answer2-->
         <label>{{ answer2 }}</label>
     </div>
 </template>
@@ -19,11 +19,10 @@ export default {
     },
     methods: {
         answerChanged(choice){
-            console.log(this.id)
-            this.choiceId = this.id
+            this.choiceId = this.id //i had trouble sending this.id so I made a variable to hold it
             console.log(this.choiceId)
-            console.log(`Answer changed: ${this.choiceId, choice}`)
-            this.$emit('answer-changed', this.choiceId, choice)
+            console.log(`Answer changed: ${this.choiceId, choice}`) //this isn't displaying right for some reason
+            this.$emit('answer-changed', this.choiceId, choice) //send to parent
         }
     },
     props: {        
